@@ -1,0 +1,18 @@
+
+section {
+    margin-top: 15%;
+}
+
+form {
+    justify-items: start;
+    display: grid;
+    grid-template-columns: 80% 20%;
+}
+
+div#input {
+    width: 100%;
+}
+
+button {
+    align-items: flex-start;
+}
