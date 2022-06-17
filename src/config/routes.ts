@@ -5,7 +5,7 @@ import Repos from '../pages/Repos/Repos';
 const routes: IRoute[] = [
     {
         path: '/',
-        name: 'Home Page',
+        name: 'Home',
         component: Home,
         exact: true
     },
