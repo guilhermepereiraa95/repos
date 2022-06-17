@@ -6,6 +6,7 @@ import './App.css';
 const App: React.FunctionComponent = props =>  {
   return (
     <div>
+      {/*MAPEIA TODAS AS ROTAS DA INTERFACE DE ROTAS*/}
       <BrowserRouter>
         <Routes>
           {routes.map((route, index) => {

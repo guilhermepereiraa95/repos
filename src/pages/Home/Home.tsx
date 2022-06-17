@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import { useNavigate } from 'react-router-dom';
 import IPage from '../../interfaces/page';
 import { FiSearch } from 'react-icons/fi';
 
@@ -7,9 +8,9 @@ import api from '../../services/api';
 const Home: React.FunctionComponent<IPage> = (props) => {
 
     const [busca, setBusca] = useState('');
-    // const navigate = useNavigate();
+    const navigate = useNavigate();
     
-
+    // AO SUBMETER O FORMULARIO, FAZ A BUSCA NA API E CHAMA A ROTA DOS REPOSITORIOS JA PASSANDO O OBJ DO USER
     async function handleSearch(e: any) {
         e.preventDefault();
             try {
@@ -17,8 +18,7 @@ const Home: React.FunctionComponent<IPage> = (props) => {
                     api.get(`${busca}`)
                     .then(response => {
                         if(response.data && response.status === 200){
-                            // navigate(`${busca}/repos`);
-                            window.open(`${busca}/repos`);
+                            navigate(`${busca}/repos`, {state: { user: response.data}})
                         } else {
                             alert('Usuário não encontrado no github. Verifique se você digitou o nome corretamente.');
                         }
@@ -35,7 +35,6 @@ const Home: React.FunctionComponent<IPage> = (props) => {
 
     return (
         <div className="container">
-            {props.name}
             <section>
                 <h3 className='text-center'>Buscar repositório no Github</h3>
                 <form onSubmit={handleSearch}> 

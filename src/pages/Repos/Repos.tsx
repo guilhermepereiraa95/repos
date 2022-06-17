@@ -1,30 +1,24 @@
 import React, { useState } from 'react';
 import IPage from '../../interfaces/page';
-import { useParams } from 'react-router-dom';
+import { useLocation, useParams } from 'react-router-dom';
 import api from '../../services/api';
 import { FiStar, FiUsers, FiMail, FiShare2, FiCircle, FiBook } from 'react-icons/fi';
-
+// TIPAGEM DO COMPONENTE POR MEIO DE INTERFACE DA PAGINA, PODERIA SER IMPLEMENTADO MAIS COISAS TAMBEM
 const Repos: React.FunctionComponent<IPage> = (props) => {
-    const [user, setUser]: any = useState([]);
+
+    // PEGA O USUARIO NA ROTA
+    const { state } = useLocation();
+    const data: any = state;
+    const user: any = data.user;
     const [repos, setRepos] = useState([]);
     const params = useParams();
-
+    //PEGA O NOME DO USUARIO DOS PARAMETROS DA ROTA E CHAMA A API DE REPOSITORIOS
     useState(() => {
         let userName = params.busca;
-        api.get(`${userName}`)
-        .then(response => {
-            if(response.data && response.status === 200){
-                setUser(response.data)
-            } else {
-                alert('Usuário não encontrado no github. Verifique se você digitou o nome corretamente.');
-            }
-        }).catch((err) => {
-            // alert('Ocorreu um erro na sua requisição: ' + err);
-        });
-
         api.get(`${userName}/repos`)
             .then((response) => {
                 response.data.map((r: any) => {
+                    // TRATA A DATA POREM O IDEAL SERIA USAR O INTL.DATEFORMAT PARA PEGAR O FORMATO DO LAYOUT
                     let index = r['updated_at'].indexOf("T");
                     let first = r['updated_at'].substr(0, index);
                     r['updated_at'] = first;
@@ -35,7 +29,6 @@ const Repos: React.FunctionComponent<IPage> = (props) => {
                 console.error("ops! ocorreu um erro" + err);
             });
     });
-
 
     return (
         <div className="container">
