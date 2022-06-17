@@ -19,8 +19,9 @@ const Repos: React.FunctionComponent<IPage> = (props) => {
                 alert('Usuário não encontrado no github. Verifique se você digitou o nome corretamente.');
             }
         }).catch((err) => {
-            alert('Ocorreu um erro na sua requisição: ' + err);
+            // alert('Ocorreu um erro na sua requisição: ' + err);
         });
+
         api.get(`${userName}/repos`)
             .then((response) => {
                 response.data.map((r: any) => {
