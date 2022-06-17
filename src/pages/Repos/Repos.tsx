@@ -25,9 +25,8 @@ const Repos: React.FunctionComponent<IPage> = (props) => {
             .then((response) => {
                 response.data.map((r: any) => {
                     let index = r['updated_at'].indexOf("T");
-                    let first = r['updated_at'].substr(0, index); // Gets the first part
-                    let formated = first.replaceAll('-', ',')
-                    r['updated_at'] = formated;
+                    let first = r['updated_at'].substr(0, index);
+                    r['updated_at'] = first;
                     return r;
                 })
                 setRepos(response.data)
