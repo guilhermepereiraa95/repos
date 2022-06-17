@@ -1,5 +1,4 @@
 import React, { useState } from 'react';
-import { useNavigate } from 'react-router-dom';
 import IPage from '../../interfaces/page';
 import { FiSearch } from 'react-icons/fi';
 
